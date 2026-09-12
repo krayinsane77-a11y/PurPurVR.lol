@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PurPurVR Hub</title>
     <style>
-        /* Bulletproof Base64 Encoded Thin Crosshair (Snipping Tool Style) */
+        /* Hide the default system mouse pointer completely across the site */
         *, html, body, .bio-container, a, button, .btn-link {
-            cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48bGluZSB4MT0nMTYnIHkxPSczJyB4Mj0nMTYnIHkyPScxMScgc3Ryb2tlPScjQ0NDQ0ZGJyBzdHJva2Utd2lkdGg9JzEuNScvPjxsaW5lIHgxPScxNicgeTE9JzIxJyB4Mj0nMTYnIHkyPScyOScgc3Ryb2tlPScjQ0NDQ0ZGJyBzdHJva2Utd2lkdGg9JzEuNScvPjxsaW5lIHgxPSczJyB5MT0nMTYnIHgyPScxMScgeTI9JzE2JyBzdHJva2U9I0NDQ0NGRicgc3Ryb2tlLXdpZHRoPScxLjUnLz48bGluZSB4MT0nMjEnIHkxPScxNicgeDI9JzI5JyB5Mj0nMTYnIHN0cm9rZT0nI0NDQ0NGRicgc3Ryb2tlLXdpZHRoPScxLjUnLz48L3N2Zz4=") 16 16, crosshair !important;
+            cursor: none !important;
         }
 
         * {
@@ -85,6 +85,17 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(160, 80, 240, 0.6);
         }
+
+        /* This is our new physical cursor layer */
+        #custom-cursor {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            pointer-events: none;
+            z-index: 999999;
+            transform: translate(-50%, -50%);
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -94,6 +105,16 @@
         <source src="https://mixkit.co" type="video/mp4">
     </video>
 
+    <!-- The actual custom crosshair element -->
+    <div id="custom-cursor">
+        <svg xmlns="http://w3.org" width="32" height="32" viewBox="0 0 32 32">
+            <line x1="16" y1="3" x2="16" y2="11" stroke="#CCCCFF" stroke-width="2"/>
+            <line x1="16" y1="21" x2="16" y2="29" stroke="#CCCCFF" stroke-width="2"/>
+            <line x1="3" y1="16" x2="11" y2="16" stroke="#CCCCFF" stroke-width="2"/>
+            <line x1="21" y1="16" x2="29" y2="16" stroke="#CCCCFF" stroke-width="2"/>
+        </svg>
+    </div>
+
     <!-- Center Card Panel -->
     <div class="bio-container">
         <h2>@PurPurVR</h2>
@@ -101,6 +122,16 @@
         <a href="https://discord.gg" target="_blank" class="btn-link">EIC Modding Discord</a>
         <a href="https://youtube.com" target="_blank" class="btn-link">YouTube Channel</a>
     </div>
+
+    <!-- Quick tracking script to glue the crosshair to your mouse -->
+    <script>
+        const customCursor = document.getElementById('custom-cursor');
+        
+        window.addEventListener('mousemove', (e) => {
+            customCursor.style.left = e.clientX + 'px';
+            customCursor.style.top = e.clientY + 'px';
+        });
+    </script>
 
 </body>
 </html>
