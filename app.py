@@ -3,21 +3,18 @@ import streamlit as st
 # Force wide layout and remove Streamlit's default margins
 st.set_page_config(page_title="PurPurVR Hub", layout="centered", initial_sidebar_state="collapsed")
 
-# Complete CSS override to apply the periwinkle cursor and style the purple bio container
+# Complete CSS override targeting all Streamlit containers with proper hotspot coordinates
 st.markdown(
     """
     <style>
-    /* Injects custom styles directly into the root frame */
-    iframe {
-        display: none !important;
+    /* Fixed Periwinkle Cursor with 0 0 browser hotspot coordinates */
+    html, body, .stApp, [data-testid="stAppViewContainer"], * {
+        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://w3.org' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23CCCCFF' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E") 0 0, auto !important;
     }
     
-    html, body, [data-testid="stAppViewContainer"], .stApp {
-        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://w3.org' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23CCCCFF' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E"), auto !important;
-    }
-    
+    /* Interactive Hover elements pointer */
     a, button, .btn-link, [role="button"] {
-        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://w3.org' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23B0C4DE' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E"), pointer !important;
+        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://w3.org' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23B0C4DE' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E") 0 0, pointer !important;
     }
 
     /* Turn off Streamlit's standard app backgrounds and header wrappers */
