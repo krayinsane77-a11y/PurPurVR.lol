@@ -7,6 +7,16 @@ st.set_page_config(page_title="PurPurVR Hub", layout="centered", initial_sidebar
 st.markdown(
     """
     <style>
+    /* Custom Periwinkle Cursor Setup */
+    html, body, .stApp {
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='32' height='32' viewBox='0 0 32 32'><path d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23CCCCFF' stroke='white' stroke-width='1.5'/></svg>"), auto !important;
+    }
+    
+    /* Make sure interactive links use a periwinkle pointer cursor when hovering */
+    a, button, .btn-link {
+        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='32' height='32' viewBox='0 0 32 32'><path d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23B0C4DE' stroke='white' stroke-width='1.5'/></svg>"), pointer !important;
+    }
+
     /* Turn off Streamlit's standard app backgrounds and header wrappers */
     .stApp, [data-testid="stHeader"], [data-testid="stMainBlockContainer"] {
         background: transparent !important;
