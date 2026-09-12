@@ -7,18 +7,18 @@ st.set_page_config(page_title="PurPurVR Hub", layout="centered", initial_sidebar
 st.markdown(
     """
     <style>
-    /* Custom Periwinkle Cursor Setup */
-    html, body, .stApp {
-        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='32' height='32' viewBox='0 0 32 32'><path d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23CCCCFF' stroke='white' stroke-width='1.5'/></svg>"), auto !important;
+    /* Absolute Global Overrides for Periwinkle Custom Cursor */
+    * {
+        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23CCCCFF' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E"), auto !important;
     }
     
-    /* Make sure interactive links use a periwinkle pointer cursor when hovering */
-    a, button, .btn-link {
-        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='32' height='32' viewBox='0 0 32 32'><path d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23B0C4DE' stroke='white' stroke-width='1.5'/></svg>"), pointer !important;
+    /* Interactive Elements Pointer Override */
+    a, button, .btn-link, [role="button"] {
+        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23B0C4DE' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E"), pointer !important;
     }
 
     /* Turn off Streamlit's standard app backgrounds and header wrappers */
-    .stApp, [data-testid="stHeader"], [data-testid="stMainBlockContainer"] {
+    .stApp, [data-testid="stHeader"], [data-testid="stMainBlockContainer"], main {
         background: transparent !important;
         background-color: transparent !important;
     }
@@ -101,4 +101,5 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
