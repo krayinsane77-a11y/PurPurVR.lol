@@ -83,7 +83,8 @@ st.markdown(
 
     <!-- Center Card Panel -->
     <div class="bio-container">
-        <h2>@YourName</h2>
+        <h2>@PurPurVR
+    </h2>
         <p>VR Modding & Creations</p>
         <a href="https://discord.gg" target="_blank" class="btn-link">Join My Discord</a>
         <a href="https://youtube.com" target="_blank" class="btn-link">YouTube Channel</a>
