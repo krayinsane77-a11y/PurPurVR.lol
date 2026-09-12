@@ -3,18 +3,18 @@ import streamlit as st
 # Force wide layout and remove Streamlit's default margins
 st.set_page_config(page_title="PurPurVR Hub", layout="centered", initial_sidebar_state="collapsed")
 
-# Complete CSS override using cross-browser compatible Base64 encoding
+# Complete CSS override using an animated glowing target cursor setup
 st.markdown(
     """
     <style>
-    /* Bulletproof Base64 Periwinkle Cursor Setup */
+    /* Premium Pulsing Neon Crosshair with Center Hotspot Alignment (16 16) */
     html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stAppViewContainer"] * {
-        cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48cGF0aCBkPSdNNCwyIEw0LDI2IEwxMSwxOSBMMTksMjcgTDIzLDIzIEwxNSwxNSBMMjIsMTIgWicgZmlsbD0nI0NDQ0NGRicgc3Ryb2tlPSd3aGl0ZScgc3Ryb2tlLXdpZHRoPScxLjUnLz48L3N2Zz4=") 0 0, auto !important;
+        cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48c3R5bGU+QGtleWZyYW1lcyBwdWxzZSB7IDAlLCAxMDAlIHsgdHJhbnNmb3JtOiBzY2FsZSgxKTsgb3BhY2l0eTogMC44OyB9IDUwJSB7IHRyYW5zZm9ybTogc2NhbGUoMS4yKTsgb3BhY2l0eTogMTsgfSB9IC5nbG93IHsgdHJhbnNmb3JtLW9yaWdpbjogMTZweCAxNnB4OyBhbmltYXRpb246IHB1bHNlIDEuNXMgaW5maW5pdGUgZWFzZS1pbi1vdXQ7IH08L3N0eWxlPjxjaXJjbGUgY3g9JzE2JyBjeT0nMTYnIHI9JzUnIGZpbGw9J25vbmUnIHN0cm9rZT0nI0NDQ0NGRicgc3Ryb2tlLXdpZHRoPScxLjUnIGNsYXNzPSdnbG93Jy8+PGNpcmNsZSBjeD0nMTYnIGN5PScxNicgcj0nMS41JyBmaWxsPScjQ0NDQ0ZGJy8+PGxpbmUgeDE9JzE2JyB5MT0nMicgeDI9JzE2JyB5Mj0nNycgc3Ryb2tlPScjQ0NDQ0ZGJyBzdHJva2Utd2lkdGg9JzEuNScvPjxsaW5lIHgxPScxNicgeTE9JzI1JyB4Mj0nMTYnIHkyPSczMCcgc3Ryb2tlPScjQ0NDQ0ZGJyBzdHJva2Utd2lkdGg9JzEuNScvPjxsaW5lIHgxPScyJyB5MT0nMTYnIHgyPSc3JyB5Mj0nMTYnIHN0cm9rZT0nI0NDQ0NGRicgc3Ryb2tlLXdpZHRoPScxLjUnLz48bGluZSB4MT0nMjUnIHkxPSIxNicgeDI9JzMwJyB5Mj0nMTYnIHN0cm9rZT0nI0NDQ0NGRicgc3Ryb2tlLXdpZHRoPScxLjUnLz48L3N2Zz4=") 16 16, auto !important;
     }
     
-    /* Interactive Hover element pointers */
+    /* Interactive Hover Element - Inner Target locks tighter and glows a deeper purple */
     a, button, .btn-link, [role="button"], a * {
-        cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48cGF0aCBkPSdNNCwyIEw0LDI2IEwxMSwxOSBMMTksMjcgTDIzLDIzIEwxNSwxNSBMMjIsMTIgWicgZmlsbD0nI0NDQ0NGRicgc3Ryb2tlPSd3aGl0ZScgc3Ryb2tlLXdpZHRoPScxLjUnLz48L3N2Zz4=") 0 0, pointer !important;
+        cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48Y2lyY2xlIGN4PScxNicgY3k9JzE2JyByPSczJyBmaWxsPSdub25lJyBzdHJva2U9JyNCOTg0RkYnIHN0cm9rZS13aWR0aD0nMicvPjxjaXJjbGUgY3g9JzE2JyBjeT0nMTYnIHI9JzInIGZpbGw9J0NDQ0NGRicvPjxsaW5lIHgxPScxNicgeTE9JzInIHgyPScxNicgeTI9JzYnIHN0cm9rZT0nI0I5ODRGRicgc3Ryb2tlLXdpZHRoPScxLjUnLz48bGluZSB4MT0nMTYnIHkxPSIyNicgeDI9IjE2IiB5Mj0iMzAiIHN0cm9rZT0iI0I5ODRGRicgc3Ryb2tlLXdpZHRoPScxLjUnLz48bGluZSB4MT0nMicgeTE9JzE2JyB4Mj0nNicgeTI9JzE2JyBzdHJva2U9JyNCOTg0RkYnIHN0cm9rZS13aWR0aD0nMS41Jy8+PGxpbmUgeDE9IjI2IiB5MT0iMTYiIHgyPSIzMCIgeTI9IjE2IiBzdHJva2U9I0I5ODRGRiIgc3Ryb2tlLXdpZHRoPScxLjUnLz48L3N2Zz4=") 16 16, pointer !important;
     }
 
     /* Turn off Streamlit's standard app backgrounds and header wrappers */
@@ -101,6 +101,3 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-
-
