@@ -3,18 +3,17 @@ import streamlit as st
 # Force wide layout and remove Streamlit's default margins
 st.set_page_config(page_title="PurPurVR Hub", layout="centered", initial_sidebar_state="collapsed")
 
-# Complete CSS override to turn the Streamlit wrapper dark/invisible and center components
+# Complete CSS and JavaScript injection for the custom cursor tracer trail
 st.markdown(
     """
     <style>
-    /* Absolute Global Overrides for Periwinkle Custom Cursor */
-    * {
-        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23CCCCFF' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E"), auto !important;
+    /* Reset cursor back to standard look */
+    *, html, body, .stApp, a, button, .btn-link {
+        cursor: default !important;
     }
     
-    /* Interactive Elements Pointer Override */
     a, button, .btn-link, [role="button"] {
-        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23B0C4DE' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E"), pointer !important;
+        cursor: pointer !important;
     }
 
     /* Turn off Streamlit's standard app backgrounds and header wrappers */
@@ -33,6 +32,7 @@ st.markdown(
         object-fit: cover;
         z-index: -1;
         filter: brightness(0.4);
+        pointer-events: none;
     }
     
     /* Central Purple Glassmorphism Profile Box */
@@ -49,6 +49,8 @@ st.markdown(
         color: #ffffff !important;
         box-shadow: 0 10px 30px rgba(75, 0, 130, 0.4); /* Purple glow shadow */
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        position: relative;
+        z-index: 10;
     }
     
     .bio-container h2 {
@@ -84,6 +86,20 @@ st.markdown(
         transform: translateY(-2px);
         box-shadow: 0 5px 20px rgba(160, 80, 240, 0.6); /* Vibrant purple hover glow */
     }
+
+    /* Tracer Trail Elements Styling */
+    .trail-dot {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        background-color: #CCCCFF; /* Periwinkle Color */
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 99999;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s linear, opacity 0.4s ease-out;
+        box-shadow: 0 0 8px #CCCCFF, 0 0 15px #9999FF;
+    }
     </style>
 
     <!-- Moving Background Track Link -->
@@ -98,6 +114,73 @@ st.markdown(
         <a href="https://discord.gg" target="_blank" class="btn-link">EIC Modding Discord</a>
         <a href="https://youtube.com" target="_blank" class="btn-link">YouTube Channel</a>
     </div>
+
+    <!-- Mouse Tracer JavaScript Engine -->
+    <script>
+    const dots = [];
+    const maxDots = 20; // Length of the trailing path link line
+
+    // Create the pool of tracer dot elements
+    for (let i = 0; i < maxDots; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'trail-dot';
+        dot.style.opacity = 0;
+        document.body.appendChild(dot);
+        dots.push({
+            element: dot,
+            x: 0,
+            y: 0
+        });
+    }
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let isMoving = false;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        isMoving = true;
+    });
+
+    // Handle tracking math loop animation frames smoothly
+    function animate() {
+        let x = mouseX;
+        let y = mouseY;
+
+        dots.forEach((dot, index) => {
+            const nextDot = dots[index + 1] || dots[0];
+            
+            dot.element.style.left = x + 'px';
+            dot.element.style.top = y + 'px';
+            
+            // Scaled size fade out across the tail length
+            const scale = (maxDots - index) / maxDots;
+            dot.element.style.transform = `translate(-50%, -50%) scale(${scale})`;
+            
+            // If the mouse is stationary, fade out the trail
+            if (isMoving) {
+                dot.element.style.opacity = scale * 0.8;
+            } else {
+                dot.element.style.opacity = parseFloat(dot.element.style.opacity) * 0.9;
+            }
+
+            // Interpolate smooth step offsets to form the continuous curved string link
+            x += (nextDot.x - x) * 0.35;
+            y += (nextDot.y - y) * 0.35;
+            
+            dot.x = x;
+            dot.y = y;
+        });
+
+        // Set moving check flag to false to catch idle frames smoothly
+        isMoving = false;
+        requestAnimationFrame(animate);
+    }
+
+    // Initialize layout path loop tracking
+    setTimeout(animate, 500);
+    </script>
     """,
     unsafe_allow_html=True
 )
