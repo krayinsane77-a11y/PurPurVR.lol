@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PurPurVR Hub</title>
     <style>
-        /* Hide default system mouse cursor completely across the website layout */
+        /* Force-hide the normal system mouse pointer everywhere across the layout framework */
         *, html, body, .bio-container, a, button, .btn-link {
             cursor: none !important;
         }
@@ -54,6 +54,18 @@
             z-index: 10;
         }
 
+        /* Profile Picture Circular Frame Styling */
+        .pfp-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px auto;
+            display: block;
+            border: 2.5px solid rgba(180, 100, 255, 0.8);
+            box-shadow: 0 0 15px rgba(180, 100, 255, 0.6); /* Purple ring glow */
+        }
+
         .bio-container h2 {
             margin-bottom: 5px;
             font-weight: 700;
@@ -86,18 +98,15 @@
             box-shadow: 0 5px 20px rgba(160, 80, 240, 0.6);
         }
 
-        /* Particle Trail Dot Elements Styling */
-        .trail-dot {
+        /* This is our physical custom tracking cursor overlay element */
+        #custom-cursor {
             position: fixed;
-            width: 6px;
-            height: 6px;
-            background-color: #CCCCFF; /* Periwinkle Color */
-            border-radius: 50%;
+            width: 32px;
+            height: 32px;
             pointer-events: none;
             z-index: 999999;
             transform: translate(-50%, -50%);
-            opacity: 0;
-            box-shadow: 0 0 8px #CCCCFF, 0 0 15px #9999FF; /* Glowing look */
+            display: block;
         }
     </style>
 </head>
@@ -108,62 +117,36 @@
         <source src="https://mixkit.co" type="video/mp4">
     </video>
 
+    <!-- The actual custom Snipping Tool style crosshair object -->
+    <div id="custom-cursor">
+        <svg xmlns="http://w3.org" width="32" height="32" viewBox="0 0 32 32">
+            <line x1="16" y1="2" x2="16" y2="10" stroke="#CCCCFF" stroke-width="2"/>
+            <line x1="16" y1="22" x2="16" y2="30" stroke="#CCCCFF" stroke-width="2"/>
+            <line x1="2" y1="16" x2="10" y2="16" stroke="#CCCCFF" stroke-width="2"/>
+            <line x1="22" y1="16" x2="30" y2="16" stroke="#CCCCFF" stroke-width="2"/>
+        </svg>
+    </div>
+
     <!-- Center Card Panel -->
     <div class="bio-container">
+        <!-- Change the link inside src="..." to your own image link -->
+        <img class="pfp-avatar" src="https://www.google.com/imgres?q=spider%20man%20polyester%20edit&imgurl=https%3A%2F%2Fwww.tiktok.com%2Fapi%2Fimg%2F%3FitemId%3D7668190002081172749%26location%3D0%26aid%3D1988&imgrefurl=https%3A%2F%2Fwww.tiktok.com%2F%40bright.editx%2Fvideo%2F7668190002081172749&docid=AglVnMpFhPcYJM&tbnid=QUUlYAKgvSjarM&vet=12ahUKEwjs9u2iiuqWAxUxnSsGHSitOLEQnPAOegUIiwEQAA..i&w=1920&h=1080&hcb=2&ved=2ahUKEwjs9u2iiuqWAxUxnSsGHSitOLEQnPAOegUIiwEQAA" alt="Profile Picture">
+        
         <h2>@PurPurVR</h2>
         <p>VR Modding & Creations</p>
-        <a href="https://discord.gg" target="_blank" class="btn-link">EIC Modding Discord</a>
+        <a href="https://discord.com/invite/XnFxrkuKM5" target="_blank" class="btn-link">EIC Modding</a>
         <a href="https://youtube.com" target="_blank" class="btn-link">YouTube Channel</a>
     </div>
 
-    <!-- Smooth Mouse Trail Tracking Engine -->
+    <!-- Quick frame update tracker to glue the vector target exactly to your mouse coordinates -->
     <script>
-        const dots = [];
-        const maxDots = 10; // Number of glowing tracking elements inside the tail
-
-        // Generate tracking dot layers
-        for (let i = 0; i < maxDots; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'trail-dot';
-            document.body.appendChild(dot);
-            dots.push({ element: dot, x: 0, y: 0 });
-        }
-
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-
+        const customCursor = document.getElementById('custom-cursor');
+        
         window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+            customCursor.style.left = e.clientX + 'px';
+            customCursor.style.top = e.clientY + 'px';
         });
-
-        // Framerate math layout engine that handles smooth cursor trailing inertia
-        function animate() {
-            let x = mouseX;
-            let y = mouseY;
-
-            dots.forEach((dot, index) => {
-                const nextDot = dots[index + 1] || dots[0];
-                
-                dot.element.style.left = x + 'px';
-                dot.element.style.top = y + 'px';
-                
-                // Scale dots down so the trail gets thinner at the tail end
-                const scale = (maxDots - index) / maxDots;
-                dot.element.style.transform = `translate(-50%, -50%) scale(${scale})`;
-                dot.element.style.opacity = scale * 0.9;
-
-                // Inertia lag math to form the smooth follow trail link
-                x += (nextDot.x - x) * 0.25;
-                y += (nextDot.y - y) * 0.25;
-                
-                dot.x = x;
-                dot.y = y;
-            });
-
-            requestAnimationFrame(animate);
-        }
-        animate();
     </script>
+
 </body>
 </html>
