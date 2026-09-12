@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PurPurVR Hub</title>
     <style>
-        /* Hide the default system mouse pointer completely across the site */
+        /* Hide default system mouse cursor completely across the website layout */
         *, html, body, .bio-container, a, button, .btn-link {
             cursor: none !important;
         }
@@ -86,15 +86,18 @@
             box-shadow: 0 5px 20px rgba(160, 80, 240, 0.6);
         }
 
-        /* This is our new physical cursor layer */
-        #custom-cursor {
+        /* Particle Trail Dot Elements Styling */
+        .trail-dot {
             position: fixed;
-            width: 32px;
-            height: 32px;
+            width: 6px;
+            height: 6px;
+            background-color: #CCCCFF; /* Periwinkle Color */
+            border-radius: 50%;
             pointer-events: none;
             z-index: 999999;
             transform: translate(-50%, -50%);
-            display: block;
+            opacity: 0;
+            box-shadow: 0 0 8px #CCCCFF, 0 0 15px #9999FF; /* Glowing look */
         }
     </style>
 </head>
@@ -105,16 +108,6 @@
         <source src="https://mixkit.co" type="video/mp4">
     </video>
 
-    <!-- The actual custom crosshair element -->
-    <div id="custom-cursor">
-        <svg xmlns="http://w3.org" width="32" height="32" viewBox="0 0 32 32">
-            <line x1="16" y1="3" x2="16" y2="11" stroke="#CCCCFF" stroke-width="2"/>
-            <line x1="16" y1="21" x2="16" y2="29" stroke="#CCCCFF" stroke-width="2"/>
-            <line x1="3" y1="16" x2="11" y2="16" stroke="#CCCCFF" stroke-width="2"/>
-            <line x1="21" y1="16" x2="29" y2="16" stroke="#CCCCFF" stroke-width="2"/>
-        </svg>
-    </div>
-
     <!-- Center Card Panel -->
     <div class="bio-container">
         <h2>@PurPurVR</h2>
@@ -123,15 +116,54 @@
         <a href="https://youtube.com" target="_blank" class="btn-link">YouTube Channel</a>
     </div>
 
-    <!-- Quick tracking script to glue the crosshair to your mouse -->
+    <!-- Smooth Mouse Trail Tracking Engine -->
     <script>
-        const customCursor = document.getElementById('custom-cursor');
-        
-        window.addEventListener('mousemove', (e) => {
-            customCursor.style.left = e.clientX + 'px';
-            customCursor.style.top = e.clientY + 'px';
-        });
-    </script>
+        const dots = [];
+        const maxDots = 10; // Number of glowing tracking elements inside the tail
 
+        // Generate tracking dot layers
+        for (let i = 0; i < maxDots; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'trail-dot';
+            document.body.appendChild(dot);
+            dots.push({ element: dot, x: 0, y: 0 });
+        }
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Framerate math layout engine that handles smooth cursor trailing inertia
+        function animate() {
+            let x = mouseX;
+            let y = mouseY;
+
+            dots.forEach((dot, index) => {
+                const nextDot = dots[index + 1] || dots[0];
+                
+                dot.element.style.left = x + 'px';
+                dot.element.style.top = y + 'px';
+                
+                // Scale dots down so the trail gets thinner at the tail end
+                const scale = (maxDots - index) / maxDots;
+                dot.element.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                dot.element.style.opacity = scale * 0.9;
+
+                // Inertia lag math to form the smooth follow trail link
+                x += (nextDot.x - x) * 0.25;
+                y += (nextDot.y - y) * 0.25;
+                
+                dot.x = x;
+                dot.y = y;
+            });
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 </html>
