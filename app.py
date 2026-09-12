@@ -3,18 +3,18 @@ import streamlit as st
 # Force wide layout and remove Streamlit's default margins
 st.set_page_config(page_title="PurPurVR Hub", layout="centered", initial_sidebar_state="collapsed")
 
-# Complete CSS override targeting all Streamlit containers with proper hotspot coordinates
+# Complete CSS override using cross-browser compatible Base64 encoding
 st.markdown(
     """
     <style>
-    /* Fixed Periwinkle Cursor with 0 0 browser hotspot coordinates */
-    html, body, .stApp, [data-testid="stAppViewContainer"], * {
-        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://w3.org' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23CCCCFF' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E") 0 0, auto !important;
+    /* Bulletproof Base64 Periwinkle Cursor Setup */
+    html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stAppViewContainer"] * {
+        cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48cGF0aCBkPSdNNCwyIEw0LDI2IEwxMSwxOSBMMTksMjcgTDIzLDIzIEwxNSwxNSBMMjIsMTIgWicgZmlsbD0nI0NDQ0NGRicgc3Ryb2tlPSd3aGl0ZScgc3Ryb2tlLXdpZHRoPScxLjUnLz48L3N2Zz4=") 0 0, auto !important;
     }
     
-    /* Interactive Hover elements pointer */
-    a, button, .btn-link, [role="button"] {
-        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://w3.org' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4,2 L4,26 L11,19 L19,27 L23,23 L15,15 L22,12 Z' fill='%23B0C4DE' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E") 0 0, pointer !important;
+    /* Interactive Hover element pointers */
+    a, button, .btn-link, [role="button"], a * {
+        cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48cGF0aCBkPSdNNCwyIEw0LDI2IEwxMSwxOSBMMTksMjcgTDIzLDIzIEwxNSwxNSBMMjIsMTIgWicgZmlsbD0nI0NDQ0NGRicgc3Ryb2tlPSd3aGl0ZScgc3Ryb2tlLXdpZHRoPScxLjUnLz48L3N2Zz4=") 0 0, pointer !important;
     }
 
     /* Turn off Streamlit's standard app backgrounds and header wrappers */
