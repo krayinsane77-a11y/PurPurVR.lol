@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PurPurVR Hub</title>
     <style>
-        /* Force-hide the normal system mouse pointer everywhere across the layout framework */
+        /* Forces the native Windows Snipping Tool precision crosshair everywhere universally */
         *, html, body, .bio-container, a, button, .btn-link {
-            cursor: none !important;
+            cursor: crosshair !important;
         }
 
         * {
@@ -17,8 +17,11 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        /* Smoothly moving animated neon-purple gradient background layout */
         body {
-            background-color: #000;
+            background: linear-gradient(-45deg, #0e051a, #250b3e, #14042c, #040108);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
             overflow: hidden;
             min-height: 100vh;
             display: flex;
@@ -26,16 +29,10 @@
             align-items: center;
         }
 
-        /* Direct Hosted Mixkit Purple Electrical Lightning Shape Loop */
-        .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            filter: brightness(0.4) contrast(1.2); 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Central Purple Glassmorphism Box */
@@ -111,35 +108,9 @@
             background: #a050f0;
             box-shadow: 0 0 20px rgba(160, 80, 240, 0.8);
         }
-
-        /* Custom Snipping Tool Style Crosshair Coordinate Pointer Object */
-        #custom-cursor {
-            position: fixed;
-            width: 32px;
-            height: 32px;
-            pointer-events: none;
-            z-index: 99999999;
-            transform: translate(-50%, -50%);
-            display: block;
-        }
     </style>
 </head>
 <body>
-
-    <!-- Direct Hosted Mixkit Purple Electrical Lightning Shape Loop -->
-    <video class="video-background" autoplay loop muted playsinline>
-        <source src="https://mixkit.co" type="video/mp4">
-    </video>
-
-    <!-- Custom Periwinkle Sniper Crosshair Target Cursor -->
-    <div id="custom-cursor">
-        <svg xmlns="http://w3.org" width="32" height="32" viewBox="0 0 32 32">
-            <line x1="16" y1="2" x2="16" y2="10" stroke="#CCCCFF" stroke-width="2"/>
-            <line x1="16" y1="22" x2="16" y2="30" stroke="#CCCCFF" stroke-width="2"/>
-            <line x1="2" y1="16" x2="10" y2="16" stroke="#CCCCFF" stroke-width="2"/>
-            <line x1="21" y1="16" x2="29" y2="16" stroke="#CCCCFF" stroke-width="2"/>
-        </svg>
-    </div>
 
     <!-- Central Main Info Link Hub Panel -->
     <div class="bio-container">
@@ -148,24 +119,15 @@
         <h2>@PurPurVR</h2>
         <p>VR Modding & Creations</p>
         
-        <!-- Google Drive Converted Auto-Download Link Triggers -->
-        <a href="https://drive.google.com/drive/folders/1v_ZAMkexqmETSpWZpI6VWakvitwHT-OZ?usp=drive_link" class="btn-link btn-download">Download MoonlitV2</a>
-        <a href="https://drive.google.com/drive/folders/1v_ZAMkexqmETSpWZpI6VWakvitwHT-OZ?usp=drive_link" class="btn-link btn-download">Download The Ocular Migraine</a>
+        <!-- Secure Multi-Installer Direct Download Triggers -->
+        <a href="MoonlitV2.apk" download="MoonlitV2.apk" class="btn-link btn-download">Download MoonlitV2</a>
+        <a href="OcularMigraine.apk" download="OcularMigraine.apk" class="btn-link btn-download">Download The Ocular Migraine</a>
         
         <!-- Social Media Redirection Links -->
         <a href="https://discord.gg" target="_blank" class="btn-link">EIC Modding Discord</a>
         <a href="https://youtube.com" target="_blank" class="btn-link">YouTube Channel</a>
     </div>
 
-    <!-- Layout Function Scripts -->
-    <script>
-        // Custom Precision Mouse Coordinate Engine Tracking Rules
-        const customCursor = document.getElementById('custom-cursor');
-        window.addEventListener('mousemove', (e) => {
-            customCursor.style.left = e.clientX + 'px';
-            customCursor.style.top = e.clientY + 'px';
-        });
-    </script>
-
 </body>
 </html>
+
