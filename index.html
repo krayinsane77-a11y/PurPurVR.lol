@@ -26,7 +26,7 @@
             align-items: center;
         }
 
-        /* Moving Background Layer - Neon Purple Lightning shapes */
+        /* Direct Hosted Mixkit Purple Electrical Lightning Shape Loop */
         .video-background {
             position: fixed;
             top: 0;
@@ -38,48 +38,7 @@
             filter: brightness(0.4) contrast(1.2); 
         }
 
-        /* --- SPLASH SCREEN OVERLAY --- */
-        #splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #0c0414; /* Solid dark purple/black background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999999; /* Stays above absolutely everything */
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        /* Splash Screen Enter Button */
-        .enter-btn {
-            background: rgba(140, 60, 220, 0.1);
-            color: #ffffff;
-            border: 2px solid #a050f0;
-            padding: 16px 40px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border-radius: 30px;
-            letter-spacing: 2px;
-            box-shadow: 0 0 15px rgba(160, 80, 240, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .enter-btn:hover {
-            background: #a050f0;
-            box-shadow: 0 0 25px rgba(160, 80, 240, 0.8);
-            transform: scale(1.05);
-        }
-
-        /* Class injected by JavaScript to slide the splash gate away */
-        .hidden-splash {
-            opacity: 0 !important;
-            visibility: hidden !important;
-        }
-
-        /* --- MAIN PROFILE CARD PANEL --- */
+        /* Central Purple Glassmorphism Box */
         .bio-container {
             background: rgba(25, 10, 45, 0.55); /* Translucent midnight purple */
             backdrop-filter: blur(15px);
@@ -95,6 +54,7 @@
             z-index: 10;
         }
 
+        /* Profile Picture Circular Frame Styling */
         .pfp-avatar {
             width: 110px;
             height: 110px;
@@ -118,7 +78,7 @@
             margin-bottom: 25px;
         }
 
-        /* Interactive Purple Hyperlink Navigation Blocks */
+        /* Interactive Purple Hyperlink Buttons */
         .btn-link {
             display: block;
             background: rgba(140, 60, 220, 0.15);
@@ -138,13 +98,27 @@
             box-shadow: 0 5px 20px rgba(160, 80, 240, 0.6);
         }
 
+        /* Highlighted/Glowing Download Button Variant for File Installers */
+        .btn-download {
+            border: 1px solid #a050f0;
+            background: rgba(160, 80, 240, 0.25);
+            box-shadow: 0 0 10px rgba(160, 80, 240, 0.4);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .btn-download:hover {
+            background: #a050f0;
+            box-shadow: 0 0 20px rgba(160, 80, 240, 0.8);
+        }
+
         /* Custom Snipping Tool Style Crosshair Coordinate Pointer Object */
         #custom-cursor {
             position: fixed;
             width: 32px;
             height: 32px;
             pointer-events: none;
-            z-index: 99999999; /* Always on top of everything including splash screen */
+            z-index: 99999999;
             transform: translate(-50%, -50%);
             display: block;
         }
@@ -152,19 +126,14 @@
 </head>
 <body>
 
-    <!-- 1. The Entry Splash Gateway Screen Overlay Layer -->
-    <div id="splash-screen">
-        <button class="enter-btn" onclick="enterSite()">MOONLITV2</button>
-    </div>
-
-    <!-- 2. Direct Hosted Mixkit Purple Electrical Lightning Shape Loop -->
+    <!-- Direct Hosted Mixkit Purple Electrical Lightning Shape Loop -->
     <video class="video-background" autoplay loop muted playsinline>
-        <source src="https://mixkit.co" type="video/mp4">
+        <source src="https://drive.google.com/file/d/1IuaRdxrtwM-cVkPZ8qOPEuYT3YTFkIrC/view?usp=drive_link" type="video/mp4">
     </video>
 
-    <!-- 3. Custom Periwinkle Sniper Crosshair Target Cursor -->
+    <!-- Custom Periwinkle Sniper Crosshair Target Cursor -->
     <div id="custom-cursor">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+        <svg xmlns="http://w3.org" width="32" height="32" viewBox="0 0 32 32">
             <line x1="16" y1="2" x2="16" y2="10" stroke="#CCCCFF" stroke-width="2"/>
             <line x1="16" y1="22" x2="16" y2="30" stroke="#CCCCFF" stroke-width="2"/>
             <line x1="2" y1="16" x2="10" y2="16" stroke="#CCCCFF" stroke-width="2"/>
@@ -172,11 +141,18 @@
         </svg>
     </div>
 
-    <!-- 4. Central Main Info Link Hub Panel -->
+    <!-- Central Main Info Link Hub Panel -->
     <div class="bio-container">
-        <img class="pfp-avatar" src="https://placeholder.com" alt="Profile Picture">
+        <!-- Change the link inside src="..." to your own image link -->
+        <img class="pfp-avatar" src="https://https://share.google/3qS7aCd11iF3BEYjX" alt="Profile Picture">
         <h2>@PurPurVR</h2>
         <p>VR Modding & Creations</p>
+        
+        <!-- Converted Google Drive Auto-Download File Buttons -->
+        <a href="https://google.com" class="btn-link btn-download">Download MoonlitV2</a>
+        <a href="https://google.com" class="btn-link btn-download">Download The Ocular Migraine</a>
+        
+        <!-- Social Media Redirection Links -->
         <a href="https://discord.gg" target="_blank" class="btn-link">EIC Modding Discord</a>
         <a href="https://youtube.com" target="_blank" class="btn-link">YouTube Channel</a>
     </div>
@@ -189,23 +165,6 @@
             customCursor.style.left = e.clientX + 'px';
             customCursor.style.top = e.clientY + 'px';
         });
-
-        // Splash Fade Animation Triggers + File Download Handler
-        function enterSite() {
-            // 1. Hide the splash screen smoothly
-            document.getElementById('splash-screen').classList.add('hidden-splash');
-            
-            // 2. Automatically trigger the file download
-            const downloadLink = document.createElement('a');
-            
-            // PASTE YOUR DIRECT MOD DOWNLOAD LINK INSIDE THESE SINGLE QUOTES BELOW:
-            downloadLink.href = 'https://drive.google.com/file/d/1Np6Oh-MUWISxP6DWri_YDdKEhsVVl8l8/view?usp=drive_link'; 
-            
-            downloadLink.setAttribute('download', '');
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-        }
     </script>
 
 </body>
